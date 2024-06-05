@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Multiplicación</title>
+  </head>
+  <body>
+    <h1>Calculadora de Multiplicación</h1>
+    <label for="num1">Primer número:</label>
+    <input type="number" id="num1" /><br /><br />
+    <label for="num2">Segundo número:</label>
+    <input type="number" id="num2" /><br /><br />
+    <button onclick="multiplicar()">Multiplicar</button><br /><br />
+    <div id="resultado"></div>
+
+    <script>
+      function multiplicar() {
+        const num1 = document.getElementById("num1").value;
+        const num2 = document.getElementById("num2").value;
+
+        // Verificar que se ingresaron números válidos
+        if (isNaN(num1) || isNaN(num2)) {
+          alert("Por favor, ingrese números válidos.");
+          return;
+        }
+
+        // Enviar los números al servidor
+        fetch("/multiply", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ num1: num1, num2: num2 }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById(
+              "resultado"
+            ).innerHTML = `El resultado de la multiplicación es: ${data.result}`;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "soapapi",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "Client.js",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "soap": "^1.0.3"
+  }
+}
